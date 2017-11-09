@@ -14,7 +14,7 @@
 
 #define DESIGN_CAP 100 //pF
 
-#define SAMPLING_PERIOD 5 //us
+#define SAMPLING_PERIOD 5 //ms
 
 float get_volt_from_freq(unsigned long long);
 

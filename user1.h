@@ -4,6 +4,7 @@
 #ifndef USER1_H
 #define USER1_H
 
+#include <stdbool.h>
 #include "input_params.h"
 
 struct user1_data{
@@ -13,9 +14,11 @@ struct user1_data{
   unsigned long est_energy; //nJ
   unsigned long total_energy; //nJ
   unsigned long long targ_freq; //MHz
+  bool task_done;
 };
 
 void user1_init(struct user1_data*);
+void user1_done(struct user1_data*);
 void user1_processfields(struct user1_data*, unsigned long long);
 unsigned long user1_recalc_totalenergy(struct user1_data*, unsigned long long);
 

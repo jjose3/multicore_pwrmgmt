@@ -18,8 +18,27 @@ void user2_init(struct user2_data *user)
   user->dis_energy = 0;
   user->est_energy = 0;
   user->targ_freq = 0;
+  user->task_done = false;
 
   printf("user2: %s: user2 init done\n", __func__);
+
+  return;
+}
+
+void user2_done(struct user2_data *user)
+{
+  if(user->exec_time != USER2_EXECTIME){
+    return;
+  }
+
+  user->exec_time = USER2_EXECTIME;
+  user->rem_time = 0;
+  user->dis_energy = 0;
+  user->est_energy = 0;
+  user->targ_freq = 0;
+  user->task_done = true;
+
+  printf("user2: %s: user2 task done\n", __func__);
 
   return;
 }
@@ -30,6 +49,11 @@ void user2_processfields(struct user2_data *user, unsigned long long curr_freq)
 
   user->exec_time += user->exec_time+((SAMPLING_PERIOD*1000)/2); //assumes equal priority arbiter
   user->rem_time = USER2_EXECTIME-user->exec_time;
+  
+  if(user->exec_time==USER2_EXECTIME){
+    user2_done(user);
+    return;
+  }
   
   op_volt = get_volt_from_freq(curr_freq);
   //TODO: add leakage current term, adjust units
