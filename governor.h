@@ -14,7 +14,6 @@
 #define MAX_SAMPLING_DOWN_FACTOR		(10)
 #define SCALING_MAX_FREQ			(2100000)
 #define SCALING_MIN_FREQ			(800000)
-#define RAND_MAX				(10)
 
 unsigned int cur_cpuutil = 10;
 

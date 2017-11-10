@@ -13,10 +13,10 @@
 #include "governor.h"
 
 
-unsigned int get_cpuutil(struct gov_data*)
+unsigned int get_cpuutil(struct gov_data* gov_data)
 {
 //set cpuutil to be a rand value between 0 and 10
-seed = time(NULL);
+int seed = time(NULL);
 srand(seed);   
 int r = rand()%2;
 
@@ -33,15 +33,15 @@ int r = rand()%2;
 		cur_cpuutil = 10;
 	} 
 
-gov_data->cpuutil = r;
-printf("CPU utilization set to: %d\n", gov_data->cpuutil);
+gov_data->cpu_util = cur_cpuutil;
+printf("CPU utilization set to: %d\n", gov_data->cpu_util);
 return r;
 }
 
-unsigned long long find_targfreq(struct gov_data*, unsigned long long curr_freq)
+unsigned long long find_targfreq(struct gov_data* gov_data, unsigned long long curr_freq)
 {
 	//get current cpuutil
-	cur_cpuutil = get_cpuutil(gov_data*);
+	cur_cpuutil = get_cpuutil(gov_data);
 
 	//check if current load is below or above threshold
 	if (cur_cpuutil >= DEF_FREQUENCY_UP_THRESHOLD)
@@ -71,7 +71,6 @@ unsigned long long find_targfreq(struct gov_data*, unsigned long long curr_freq)
 		    return curr_freq;
 		    }
 	}
-	printf("Frequency set to: %llu kHz\n", gov_data->cpuutil);
 }
 void gov_init(struct gov_data *gov)
 {
