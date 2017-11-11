@@ -15,7 +15,7 @@
 #define SCALING_MAX_FREQ			(2100000)
 #define SCALING_MIN_FREQ			(800000)
 
-unsigned int cur_cpuutil;
+unsigned int cur_cpuutil = 10;
 unsigned long long int target_freq;
 
 struct gov_data{

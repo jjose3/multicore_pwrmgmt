@@ -81,7 +81,6 @@ unsigned long long find_targfreq(struct gov_data* gov_data, unsigned long long c
 		    return target_freq;
 		    }
 	}
-	return target_freq;
 }
 void gov_init(struct gov_data *gov)
 {
